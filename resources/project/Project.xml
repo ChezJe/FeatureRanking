@@ -1,2 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Info MetadataType="fixedPathV2"/>
+<project MetadataType="monolithic">
+    <Categories Location="Root">
+        <Category Location="FileClassCategory">
+            <Info DataType="None" Name="Classification" ReadOnly="1" SingleValued="1"/>
+            <Label Location="artifact">
+                <Info Name="Artifact" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="convenience">
+                <Info Name="Convenience" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="derived">
+                <Info Name="Derived" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="design">
+                <Info Name="Design" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="none">
+                <Info Name="None" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="other">
+                <Info Name="Other" ReadOnly="READ_ONLY"/>
+            </Label>
+            <Label Location="test">
+                <Info Name="Test" ReadOnly="READ_ONLY"/>
+            </Label>
+        </Category>
+    </Categories>
+    <EntryPoints Location="Root">
+        <EntryPoint Location="447a581c-b5a3-44b3-bc1f-755f0504d703">
+            <Info File="helper/startup.m" GroupUUID="default" Icon="" Name="startup" Type="StartUp" Visible="0">
+                <Extension Name="StartUpPrev" Value="HEAD"/>
+            </Info>
+        </EntryPoint>
+        <EntryPoint Location="c815b7a0-b84f-416e-8d64-7c172af70390">
+            <Info File="helper/openscript.m" GroupUUID="default" Icon="" Name="openscript" Type="StartUp" Visible="0">
+                <Extension Name="StartUpPrev" Value="447a581c-b5a3-44b3-bc1f-755f0504d703"/>
+            </Info>
+        </EntryPoint>
+    </EntryPoints>
+    <Files Location="Root">
+        <File Location=".gitattributes">
+            <Info/>
+        </File>
+        <File Location=".gitignore">
+            <Info/>
+        </File>
+        <File Location="Feature_Ranking_script.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
+        <File Location="README.md">
+            <Info/>
+        </File>
+        <File Location="helper">
+            <Info/>
+            <DIR_SIGNIFIER Location="1">
+                <Info/>
+            </DIR_SIGNIFIER>
+            <File Location="computeTmin.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="getFreeParameters.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="openscript.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="plotconvergence.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="plotsummary.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="removeObjByName.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="removeObjZeroValue.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="sbiopercentileplot.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+            <File Location="startup.m">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+        </File>
+        <File Location="mPBPK_siRNA.sbproj">
+            <Info/>
+        </File>
+        <File Location="results">
+            <Info/>
+            <DIR_SIGNIFIER Location="1">
+                <Info/>
+            </DIR_SIGNIFIER>
+            <File Location="resultsGSA.mat">
+                <Info>
+                    <Category UUID="FileClassCategory">
+                        <Label UUID="design"/>
+                    </Category>
+                </Info>
+            </File>
+        </File>
+    </Files>
+    <Info Location="ProjectData">
+        <Info Name="Feature_Ranking"/>
+    </Info>
+    <ProjectPath Location="Root">
+        <Reference Location="24b5c859-d636-4a98-ba4a-8158f5f4964b">
+            <Info Ref="helper" Type="Relative"/>
+        </Reference>
+        <Reference Location="9543c335-d5aa-42ee-925e-78b2741eea46">
+            <Info Ref="results" Type="Relative"/>
+        </Reference>
+    </ProjectPath>
+</project>
