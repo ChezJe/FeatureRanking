@@ -12,14 +12,14 @@ end
 %%
 %[text] Load model from SimBiology project
 s = sbioloadproject("mPBPK_siRNA.sbproj","m1");
-modelObj = s.m1
+model = s.m1
 %%
 %[text] %[text:anchor:H_65515706] ## Determination of input parameters
 %[text] To determine which parameters we should sample from to generate a variety of response values, we will first list all free parameters in the model. These parameters should be constant and not defined by any initial assignments. 
-inputObj = getFreeParameters(modelObj);
+inputObj = getFreeParameters(model);
 inputObj = removeObjZeroValue(inputObj);
 inputObj = removeObjByName(inputObj,"mw");        % Molecular Weight
-inputObj = removeObjByName(inputObj,"dose_mgkg"); % Dose amount
+inputObj = removeObjByName(inputObj,"dose_mgkg"); % Dose amount in mg/kg
 
 inputPars = cell2table(get(inputObj,{'Type','Name','Value'}), VariableNames={'Type','Name','Value'});
 inputPars = convertvars(inputPars,"Type","categorical")
@@ -30,22 +30,22 @@ Nsamples = 10^4;
 
 distObj = arrayfun(@(x) makedist("Uniform","lower",x*10^-0.5,"upper",x*10^0.5), inputPars.Value);
 scen = SimBiology.Scenarios(inputPars.Name, distObj, Number=Nsamples, SamplingMethod='sobol');
-scen = add(scen,'cartesian','dose_mgkg',1);
+scen = scen.add('cartesian','dose_mgkg',1);
 %%
 %[text] ## Run simulations
 %[text] Create SimFunction to return `Cmin` as output.
-observableName = ["Protein","Cmin"]; 
-dose = getdose(modelObj,"single dose");
+observableName = ["Cyto.Protein","Cmin"]; 
+dose = model.getdose("single dose");
 variant = [];
 
-simfun = createSimFunction(modelObj, scen, observableName, dose, variant, UseParallel=true);
-accelerate(simfun);
+simfun = model.createSimFunction(scen, observableName, dose, variant, UseParallel=true);
+simfun.accelerate();
 %[text] Run simulations
 inputs = scen.generate()
-stopTimeHour = 200; % day
-stopTime = sbiounitcalculator('day', simfun.TimeUnits, stopTimeHour); % in units specified in SimFunction
+stopTimeDay = 200;
+stopTime = sbiounitcalculator('day', simfun.TimeUnits, stopTimeDay); % in units specified in SimFunction
 tic
-data = simfun(inputs.Variables, stopTime, getTable(dose));
+data = simfun(inputs.Variables, stopTime, dose.getTable());
 toc
 %%
 %[text] ## Format simulation results
@@ -89,7 +89,7 @@ outputname = "Cmin";
 N = height(simTable);
 Nfold = 5;
 cvp = cvpartition(N,'kfold',Nfold);
-lambdavals = (20:15:80)/N;
+lambdavals = (20:20:80)/N;
 lossvals = NaN(length(lambdavals),Nfold);
 cvptrain = cvp.training("all");
 cvptest = cvp.test("all");
@@ -106,7 +106,7 @@ parfor k = 1:Nfold
         nca = fsrnca(Ttrain,outputname, Standardize=false, Lambda=lambdavals(i),...
             Solver="sgd", LossFunction="epsiloninsensitive", FitMethod="exact");
 
-        losstemp(i) = loss(nca,Ttest,outputname,LossFunction='mse');
+        losstemp(i) = nca.loss(Ttest,outputname,LossFunction='mse');
     end
     lossvals(:,k) = losstemp;
 end
@@ -142,7 +142,7 @@ treeMdl = fitrtree(simTable,outputname,OptimizeHyperparameters="all",Hyperparame
 grid on;
 bestEstimatedPoint = bestPoint(treeMdl.HyperparameterOptimizationResults)
 %[text] Compute predictor importance on tree. This metric takes into account changes in the mean squared error due to splits on every predictor.
-scoreTree = predictorImportance(treeMdl);
+scoreTree = treeMdl.predictorImportance();
 %[text] ### 
 %[text] ### Shapley values
 %[text] We can also compute the mean of Shapley values across all simulation results to rank parameters. This method is model-agnostic and can be applied to every regression model including decision trees.
