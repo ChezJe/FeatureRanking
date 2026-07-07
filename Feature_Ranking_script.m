@@ -11,15 +11,12 @@ catch
 end
 %%
 %[text] Load model from SimBiology project
-sbioloadproject mPBPK_siRNA.sbproj m1
-
-cs = m1.getconfigset();
-cs.SolverType = "ode15s";
-m1
+s = sbioloadproject("mPBPK_siRNA.sbproj","m1");
+modelObj = s.m1
 %%
 %[text] %[text:anchor:H_65515706] ## Determination of input parameters
 %[text] To determine which parameters we should sample from to generate a variety of response values, we will first list all free parameters in the model. These parameters should be constant and not defined by any initial assignments. 
-inputObj = getFreeParameters(m1);
+inputObj = getFreeParameters(modelObj);
 inputObj = removeObjZeroValue(inputObj);
 inputObj = removeObjByName(inputObj,"mw");        % Molecular Weight
 inputObj = removeObjByName(inputObj,"dose_mgkg"); % Dose amount
@@ -38,10 +35,10 @@ scen = add(scen,'cartesian','dose_mgkg',1);
 %[text] ## Run simulations
 %[text] Create SimFunction to return `Cmin` as output.
 observableName = ["Protein","Cmin"]; 
-dose = getdose(m1,"single dose");
+dose = getdose(modelObj,"single dose");
 variant = [];
 
-simfun = createSimFunction(m1, scen, observableName, dose, variant, UseParallel=true);
+simfun = createSimFunction(modelObj, scen, observableName, dose, variant, UseParallel=true);
 accelerate(simfun);
 %[text] Run simulations
 inputs = scen.generate()
