@@ -6,7 +6,7 @@ function varargout = sbiopercentileplot(simresults, options)
 % Name: names of species to plot as cell array or string array.
 % Ex: 'drug' or {'drug','complex'}
 %
-% Times: vector of double. Timepoints at which al simulation should be
+% Times: vector of double. Timepoints at which all simulations should be
 % resampled to be synchronized. Resampling is required to be able to
 % compute statistics over all simulations.
 % Ex: 0:0.1:100
@@ -62,7 +62,6 @@ simresults = simresults(:);
 
 % Resample data at tspan
 simresults = resample(simresults, times);
-% simresults = resample(simresults);
 
 % Keep only selected vars
 simresults = selectbyname(simresults, speciesname);
@@ -84,23 +83,6 @@ gObj = gobjects(nSpec*(nPatch+1),1);
 % color palette
 if isempty(options.Color)
 
-    %     colors = [ 0         0.447        0.741
-    %              0.85        0.325        0.098
-    %              0.929       0.694        0.125
-    %              0.494       0.184        0.556
-    %              0.466       0.674        0.188
-    %              0.301       0.745        0.933
-    %              0.635       0.078        0.184]; % default MATLAB colors
-
-    % colors = [1, 0.37, 0.41;   % red
-    %           0, 0.72,1;       % light blue
-    %           0.39,0.69,0.14;  % green
-    %           0.84,0.56,0;     % gold
-    %           0.53,0.5,0.57;   % gray
-    %           0.96,0.40,0.86;  % pink
-    %           0.15,0.62,1;     % dark blue
-    %           0,0.74,0.60];    % green blue
-
     colors = [    1.0000    0.3673    0.4132
         0.8816    0.5397    0.0061
         0.5270    0.6690         0
@@ -118,7 +100,6 @@ end
 currentFig = ancestor(ax,'figure');
 if isprop(currentFig,'LiveEditorRunTimeFigure') && get(currentFig,'LiveEditorRunTimeFigure')
     drawnow limitrate nocallbacks
-   % set(currentFig,'Visible','off');
 end
 
 % prepare results table
@@ -159,8 +140,7 @@ end
 hold(ax,'off');
 
 if options.Legend == "on"
-    addcustomlegend(ax, gobj);
-    legend(ax,gobj);
+    addcustomlegend(ax, gObj);
 end
 xlabel(ax,"Time (" + timeunit + ")");
 ylabel(ax,dataunit);
@@ -176,8 +156,7 @@ if isMATLABReleaseOlderThan("R2021a")
 
     offset = offsetFactor*(maxY-minY);
     ax.YLim = offset*[-1,1]+[minY, maxY];
-    %     offset = offsetFactor*range(ax.YLim);
-    %     ax.YLim = offset*[-1,1]+ax.YLim;
+
 else
     ax.XLimitMethod = 'padded';
     ax.YLimitMethod = 'padded';
@@ -185,7 +164,7 @@ end
 
 if isfield(options,'Parent')
 
-    % restauring hold status if originally 'off'
+    % restoring hold status if originally 'off'
     if ~holdOn
         hold(ax,'off');
     end
@@ -193,7 +172,6 @@ if isfield(options,'Parent')
 end
 
 ax.YScale = options.YScale;
-%set(currentFig,'Visible','on');
 
 if nargout > 0
     varargout{1} = resultsTable;
@@ -302,9 +280,9 @@ if any(tf)
 end 
 end % mustBeInSimdata
 
-function addcustomlegend(ax, gobj)
+function addcustomlegend(ax, gObj)
 
-[lgd,icons] = legend(ax,gObj,'Interpreter','none','Visible','on');
+[lgd,icons] = legend(ax,gObj,'Interpreter','none','Visible','on'); %#ok<LEGMOP>
 lgd.Location = 'eastoutside';
 lgd.Box = 'off';
 lgd.AutoUpdate = "off"; 
@@ -341,6 +319,5 @@ for k = 1:numel(lineIdx)-1
         numCurrentPatch = numCurrentPatch + 1;
     end
 end
-%lgd.Visible = 'on';
 
 end % addcustomlegend

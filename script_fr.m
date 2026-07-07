@@ -1,6 +1,6 @@
 %[text] # Feature ranking techniques as a pre-screening methods for QSP models
 %[text] 
-%[text:tableOfContents]{"heading":"**Table of Contents**"}
+%[text:tableOfContents]{"heading":"Table of Contents"}
 %[text] ## Preparation
 startup;
 isOnline = matlab.internal.environment.context.isMATLABOnline;
@@ -8,7 +8,7 @@ if ~isOnline && isempty(gcp("nocreate"))
     parpool("Processes");
 end
 %[text] Load model from SimBiology project
-sbioloadproject mPBPK_siRNA.sbproj
+sbioloadproject mPBPK_siRNA.sbproj m1
 
 cs = m1.getconfigset();
 cs.SolverType = "ode15s";
