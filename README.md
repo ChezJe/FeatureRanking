@@ -9,7 +9,6 @@ This repository contains a MATLAB workflow for using feature-ranking techniques 
 - `mPBPK_siRNA.sbproj` - SimBiology project containing the model used by the workflow.
 - `helper/` - helper functions for selecting free model parameters, filtering parameter objects, plotting feature-ranking summaries, plotting sensitivity convergence, and setting plot defaults.
 - `results/resultsGSA.mat` - saved global sensitivity analysis results used for comparison.
-- `results/resultsMorris.mat` - saved Morris screening results.
 - `resources/` - MATLAB project metadata.
 
 
