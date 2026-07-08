@@ -89,7 +89,7 @@ outputname = "Cmin";
 N = height(simTable);
 Nfold = 5;
 cvp = cvpartition(N,'kfold',Nfold);
-lambdavals = (20:20:80)/N;
+lambdavals = (10:20:90)/N;
 lossvals = NaN(length(lambdavals),Nfold);
 cvptrain = cvp.training("all");
 cvptest = cvp.test("all");
@@ -129,7 +129,7 @@ scoreNCA = mdlNCA.FeatureWeights';
 %[text] ### Minimum Redundancy Maximum Relevance (MRMR)
 [~, scoreMRMR] = fsrmrmr(simTable,outputname);
 %[text] ### F-Test
-[~, scoreFTest] = fsrftest(simTable,outputname, NumBins=100);
+[~, scoreFTest] = fsrftest(simTable,outputname, NumBins=50);
 idxInf = isinf(scoreFTest);
 scoreFTest(idxInf) = max(scoreFTest(~idxInf));
 %[text] ### RReliefF 
@@ -165,11 +165,7 @@ plotsummary(scoreGSA,"Parameter");
 %%
 %[text] Convergence of GSA results
 plotconvergence
-%%
-%[text] Install `gramm` toolbox: [https://github.com/piermorel/gramm](https://github.com/piermorel/gramm)
-%[text] Add fit
-% websave("gramm.mltbx","https://github.com/piermorel/gramm/releases/download/v3.1.2/gramm_3.1.2.mltbx");
-% matlab.addons.toolbox.installToolbox("gramm.mltbx");
+%[text] 
 
 %[appendix]{"version":"1.0"}
 %---
