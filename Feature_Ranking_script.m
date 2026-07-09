@@ -38,7 +38,7 @@ observableName = ["Cyto.Protein","Cmin"];
 dose = model.getdose("single dose");
 variant = [];
 
-simfun = model.createSimFunction(scen, observableName, dose, variant, UseParallel=true);
+simfun = model.createSimFunction(scen, observableName, dose, variant, UseParallel=true)
 simfun.accelerate();
 %[text] Run simulations
 inputs = scen.generate()
