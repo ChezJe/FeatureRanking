@@ -16,6 +16,8 @@ end
 
 
 function exportMDfileTask(context)
+% filenames = context.Task.Inputs.paths;
+% export(filenames{:}, Format="markdown", EmbedImages=true, AcceptHTML=true);
 filenames = context.Task.Inputs.paths;
-export(filenames{:}, Format="markdown", EmbedImages=true, AcceptHTML=true);
+export(filenames{:}, Format="html", FigureFormat="webcanvas", EmbedImages=true);
 end

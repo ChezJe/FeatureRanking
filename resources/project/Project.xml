@@ -147,8 +147,12 @@
                 </Category>
             </Info>
         </File>
-        <File Location="Feature_Ranking_script.md">
-            <Info/>
+        <File Location="Feature_Ranking_script.html">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="artifact"/>
+                </Category>
+            </Info>
         </File>
     </Files>
     <Info Location="ProjectData">
