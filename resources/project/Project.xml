@@ -140,6 +140,13 @@
                 </Info>
             </File>
         </File>
+        <File Location="buildfile.m">
+            <Info>
+                <Category UUID="FileClassCategory">
+                    <Label UUID="design"/>
+                </Category>
+            </Info>
+        </File>
     </Files>
     <Info Location="ProjectData">
         <Info Name="Feature_Ranking"/>
