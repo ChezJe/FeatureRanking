@@ -147,12 +147,35 @@
                 </Category>
             </Info>
         </File>
-        <File Location="Feature_Ranking_script.html">
-            <Info>
-                <Category UUID="FileClassCategory">
-                    <Label UUID="artifact"/>
-                </Category>
-            </Info>
+        <File Location="Feature_Ranking_script.md">
+            <Info/>
+        </File>
+        <File Location="Feature_Ranking_script_media">
+            <Info/>
+            <DIR_SIGNIFIER Location="1">
+                <Info/>
+            </DIR_SIGNIFIER>
+            <File Location="figure_0.png">
+                <Info/>
+            </File>
+            <File Location="figure_1.png">
+                <Info/>
+            </File>
+            <File Location="figure_2.png">
+                <Info/>
+            </File>
+            <File Location="figure_3.png">
+                <Info/>
+            </File>
+            <File Location="figure_4.png">
+                <Info/>
+            </File>
+            <File Location="figure_5.png">
+                <Info/>
+            </File>
+            <File Location="figure_6.png">
+                <Info/>
+            </File>
         </File>
     </Files>
     <Info Location="ProjectData">
