@@ -147,6 +147,9 @@
                 </Category>
             </Info>
         </File>
+        <File Location="Feature_Ranking_script.md">
+            <Info/>
+        </File>
     </Files>
     <Info Location="ProjectData">
         <Info Name="Feature_Ranking"/>
